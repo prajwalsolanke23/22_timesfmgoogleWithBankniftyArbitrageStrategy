@@ -141,3 +141,36 @@ point_forecast, quantile_forecast = model.forecast(
 point_forecast.shape  # (2, 12)
 quantile_forecast.shape  # (2, 12, 10): mean, then 10th to 90th quantiles.
 ```
+
+---
+
+## 📈 Bank Nifty Weekly Income Trading Suite (Zerodha Kite & Telegram Automation)
+
+This repository includes an automated quantitative trading suite for generating consistent passive income on **NIFTY BANK** (Lot Size = 30 Qty) starting with **₹1,00,000 capital** on **Zerodha Kite**.
+
+### Core Execution Tools
+
+1. **Automated Signal Generator & Telegram Notifier** ([weekly_kite_signal_generator.py](file:///Users/prajwal_home/workdirectory/Antigravity/22_timesfmgoogle/weekly_kite_signal_generator.py)):
+   * Fetches real-time Bank Nifty index prices (`^NSEBANK`) via `yfinance`.
+   * Calculates Conservative 80% Probabilistic Range strikes (rounded to nearest 100 strike) based on Zerodha Varsity Chapter 10 pricing formulas.
+   * Calculates exact Zerodha Kite brokerage (₹20/order), STT (0.15%), and statutory charges.
+   * Formats a mobile-ready Telegram message with step-by-step Basket Order sequences.
+   * Run locally (using python3 or your virtual environment):
+     ```bash
+     .venv/bin/python weekly_kite_signal_generator.py --send-telegram
+     # Or if virtualenv is active:
+     python3 weekly_kite_signal_generator.py --send-telegram
+     ```
+
+2. **Cloud Automation via GitHub Actions** ([.github/workflows/weekly_banknifty_alert.yml](file:///Users/prajwal_home/workdirectory/Antigravity/22_timesfmgoogle/.github/workflows/weekly_banknifty_alert.yml)):
+   * Runs unattended every Monday morning at **09:25 AM IST** (`cron: '55 3 * * 1'`).
+   * To activate mobile notifications, add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` under your GitHub repository **Settings $\rightarrow$ Secrets and variables $\rightarrow$ Actions**.
+
+3. **Multi-Cadence Quantitative Backtester** ([backtest_banknifty_strategy.py](file:///Users/prajwal_home/workdirectory/Antigravity/22_timesfmgoogle/backtest_banknifty_strategy.py)):
+   * Simulates and compares Daily, Weekly, and Monthly trading cadences across historical NIFTY BANK data after deducting exact broker commissions.
+   * Run backtest comparison:
+     ```bash
+     .venv/bin/python backtest_banknifty_strategy.py
+     # Or:
+     python3 backtest_banknifty_strategy.py
+     ```

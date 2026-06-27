@@ -1,0 +1,28 @@
+name: Weekly Bank Nifty Telegram Alert
+
+on:
+  schedule:
+    # Trigger every Monday morning at 03:55 UTC (09:25 AM IST)
+    - cron: '55 3 * * 1'
+  workflow_dispatch:  # Allows manual testing via GitHub UI
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: pip install pandas yfinance
+
+      - name: Generate Signal & Send Telegram Alert
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python weekly_kite_signal_generator.py --send-telegram
