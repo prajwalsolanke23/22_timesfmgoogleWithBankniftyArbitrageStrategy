@@ -157,9 +157,11 @@ This repository includes an automated quantitative trading suite for generating 
    * Formats a mobile-ready Telegram message with step-by-step Basket Order sequences.
    * Run locally (using python3 or your virtual environment):
      ```bash
-     .venv/bin/python weekly_kite_signal_generator.py --send-telegram
-     # Or if virtualenv is active:
-     python3 weekly_kite_signal_generator.py --send-telegram
+     # Run with Telegram notifications enabled:
+     TELEGRAM_BOT_TOKEN="your_token" TELEGRAM_CHAT_ID="your_id" .venv/bin/python weekly_kite_signal_generator.py --send-telegram
+
+     # Or run console-only test without Telegram:
+     .venv/bin/python weekly_kite_signal_generator.py
      ```
 
 2. **Cloud Automation via GitHub Actions** ([.github/workflows/weekly_banknifty_alert.yml](file:///Users/prajwal_home/workdirectory/Antigravity/22_timesfmgoogle/.github/workflows/weekly_banknifty_alert.yml)):

@@ -1,0 +1,4 @@
+Cadence,Total Trades,Win Rate (%),Gross Profit (₹),Total Zerodha Charges (₹),Net Take-Home Profit (₹),Net ROI (%),Final Equity (₹)
+Daily Scanner (Intraday Arbitrage),29,100.0,19140.0,4262.8,14877.2,14.88,114877.2
+Weekly Expiry (4-Day Theta Decay),5,100.0,12750.0,734.96,12015.04,12.02,112015.04
+Monthly Expiry (Contango Basis Capture),1,100.0,7200.0,146.99,7053.01,7.05,107053.01
